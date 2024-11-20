@@ -54,7 +54,7 @@ import {
 import { Input } from "../components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet"
 // import { Label } from "../components/ui/"
-import FriendList from "../components/friedlist"
+import FriendList from "../components/friendlist"
 // import { UserContext } from "./api/usercontext"
 import { useContext, useEffect, useState, useRef } from "react"
 import Name from "../components/name"
@@ -62,6 +62,8 @@ import { FC } from "react"
 // import { SessionProvider, useSession } from "next-auth/react"
 import Username from "./username"
 import React from "react"
+import SearchResult from "./search-result"
+import SearchContent from "./search"
 // import { cookies } from "next/headers"
 
 // interface DashboardProps {
@@ -121,10 +123,10 @@ const DashboardContent: FC = ( ) => {
 
   return (
     // <SessionProvider>
-    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] overflow-hidden">
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
-          <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+          <div className="flex py-2 h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2">
               <Package2 className="h-6 w-6" />
               <span className="">Acme Inc</span>
@@ -176,7 +178,7 @@ const DashboardContent: FC = ( ) => {
                   <SelectItem value="Recent">Recent Messages</SelectItem>
                 </SelectContent>
               </Select>
-              <ScrollArea className="mt-[0.6vh]whitespace-nowrap pt-1 pb-1 rounded-xl border shadow-inner">
+              <ScrollArea className="mt-[0.6vh] h-[70vh] whitespace-nowrap pt-1 pb-1 rounded-xl border shadow-inner">
                 <FriendList/>
                 <FriendList/>
                 <FriendList/>
@@ -194,7 +196,18 @@ const DashboardContent: FC = ( ) => {
                 <FriendList/>
                 <FriendList/>
                 <FriendList/>
-                <ScrollBar orientation="horizontal" />
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
+                <FriendList/>
               </ScrollArea>
             </div>
           </div>
@@ -295,17 +308,18 @@ const DashboardContent: FC = ( ) => {
                   {/* <Button> */}
                     <AlertDialogTrigger>Find Users</AlertDialogTrigger>
                   {/* </Button> */}
-                  <AlertDialogContent>
+                  <AlertDialogContent className="w-[80vw] max-w-2xl">
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                      <AlertDialogTitle  className="text-center mb-6">
+                        <p>Find Users</p>
+                      </AlertDialogTitle>
                       <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
+                        <SearchContent/>
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction>Continue</AlertDialogAction>
+                      <AlertDialogCancel>Close</AlertDialogCancel>
+                      {/* <AlertDialogAction>Continue</AlertDialogAction> */}
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>

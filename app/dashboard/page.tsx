@@ -1,9 +1,13 @@
+import DashboardContent from '@/components/dashboard-contents'
 import React from 'react'
 
-const page = () => {
+const DashboardPage = () => {
   return (
-    <div>page</div>
+    <div>
+      <DashboardContent/>
+    </div>
+
   )
 }
 
-export default page
+export default DashboardPage

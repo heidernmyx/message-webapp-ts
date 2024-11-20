@@ -35,7 +35,7 @@ export const updateSession = async (request: NextRequest) => {
     const user = await supabase.auth.getUser();
 
     // Redirect logged-in users from /sign-in and /sign-up
-    if (user.data) {
+    if (user.data == null) {
       if (request.nextUrl.pathname === "/sign-in" || request.nextUrl.pathname === "/sign-up") {
         return NextResponse.redirect(new URL("/dashboard", request.url));
       }

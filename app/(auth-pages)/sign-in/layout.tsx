@@ -6,7 +6,7 @@ import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
-  import "./globals.css";
+  // import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -26,18 +26,18 @@ export default function RootLayout({
 
   
   return (
-    <html lang="en" className={GeistSans.className} suppressHydrationWarning>
-      <body className="bg-background text-foreground">
+    // <html lang="en" className={GeistSans.className} suppressHydrationWarning>
+      // <body className="bg-background text-foreground">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {/* <main className="min-h-screen flex flex-col items-center">
+          <main className="min-h-screen flex flex-col items-center">
             <div className="flex-1 w-full flex flex-col gap-20 items-center">
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-                <div className="w-full max-w-5xl flex justify-end items-center p-3 px-5 text-sm"> */}
+                <div className="w-full max-w-5xl flex justify-end items-center p-3 px-5 text-sm">
                   {/* <div className="flex gap-5 items-center font-semibold">
                     <Link href={"/"}>Next.js Supabase Starter</Link>
                     <div className="flex items-center gap-2">
@@ -46,15 +46,15 @@ export default function RootLayout({
                   </div> */}
                   {/* {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />} */}
                   
-                  {/* <div className="space-x-8 flex ">
+                  <div className="space-x-8 flex ">
                     <HeaderAuth />
                     <ThemeSwitcher />
                   </div>
                 </div>
               </nav>
-              <div className="flex flex-col max-w-6xl"> */}
+              <div className="flex flex-col max-w-6xl">
                 {children}
-              {/* </div>
+              </div>
               <footer className="text-xs pt-5 border-t w-full flex justify-center">
                 <p>
                   Made by{" "}
@@ -69,9 +69,9 @@ export default function RootLayout({
                 </p>
               </footer>
             </div>
-          </main> */}
+          </main>
         </ThemeProvider>
-      </body>
-    </html>
+      // </body>
+    // </html>
   );
 }

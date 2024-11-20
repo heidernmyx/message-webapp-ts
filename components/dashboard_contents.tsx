@@ -59,7 +59,6 @@ import FriendList from "../components/friedlist"
 import { useContext, useEffect, useState, useRef } from "react"
 import Name from "../components/name"
 import { FC } from "react"
-import { SessionProvider, useSession } from "next-auth/react"
 import Username from "./username"
 // import { cookies } from "next/headers"
 
