@@ -13,7 +13,6 @@ import {
   Users,
 } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
-
 import { Badge } from "../components/ui/badge"
 import { Button } from "../components/ui/button"
 import { ScrollArea, ScrollBar } from "../components/ui/scroll-area"
@@ -169,7 +168,7 @@ const DashboardContent: FC = ( ) => {
               <Select
                 // onValueChange={(event) => setValue("gender", event)}
               >
-                <SelectTrigger id="select" className="flex-auto w-full my-[0.6vh] appearance-none bg-background shadow-none" > 
+                <SelectTrigger id="select" className="flex-auto w-full my-[0.6vh]  appearance-none bg-background shadow-none" > 
                   {/* <SelectValue value="Active" placeholder="Active"/> */}
                 </SelectTrigger>
                 <SelectContent>
@@ -178,7 +177,7 @@ const DashboardContent: FC = ( ) => {
                   <SelectItem value="Recent">Recent Messages</SelectItem>
                 </SelectContent>
               </Select>
-              <ScrollArea className="mt-[0.6vh] h-[70vh] whitespace-nowrap pt-1 pb-1 rounded-xl border shadow-inner">
+              <ScrollArea className="mt-[1vh] h-[70vh] whitespace-nowrap pt-1 pb-1 rounded-xl border shadow-inner">
                 <FriendList/>
                 <FriendList/>
                 <FriendList/>
@@ -313,7 +312,7 @@ const DashboardContent: FC = ( ) => {
                       <AlertDialogTitle  className="text-center mb-6">
                         <p>Find Users</p>
                       </AlertDialogTitle>
-                      <AlertDialogDescription>
+                      <AlertDialogDescription asChild>
                         <SearchContent/>
                       </AlertDialogDescription>
                     </AlertDialogHeader>

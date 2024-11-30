@@ -1,12 +1,18 @@
 "use server";
 
 import { encodedRedirect } from "@/utils/utils";
-import { createClient } from "@/utils/supabase/server";
+import { createClient, createAdminClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export const signUpAction = async (formData: FormData) => {
 
+
+export const adminClient = async (): Promise<any> => {
+  const supabaseAdmin = await createAdminClient();
+  return supabaseAdmin;
+}
+
+export const signUpAction = async (formData: FormData) => {
 
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
@@ -32,7 +38,7 @@ export const signUpAction = async (formData: FormData) => {
   console.log("data is:", userData)
 
   if (error) {
-    return encodedRedirect("success", "/sign-up", "Email is already taken");
+    return encodedRedirect("success", "/sign-up", error.message);
   } else {
     return encodedRedirect( 
       "success",
@@ -56,7 +62,7 @@ export const signInAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
-  return redirect("/protected");
+  return redirect("/dashboard");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
@@ -135,3 +141,37 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
+
+
+
+export const searchByUsername = async (searchText: string) => {
+
+  const supabaseAdmin = await adminClient();  
+  const { data, error } = await supabaseAdmin
+    .from('auth.users') // Accessing the auth table directly
+    .select('*')
+    .ilike('user_metadata->>display_name', `%${searchText}%`); // Filter by username
+
+  if (error) {
+    console.error('Error fetching users:', error);
+    return;
+  }
+  console.log('Users:', data);
+};
+
+
+export const searchByUuid = async (searchText: string) => {
+
+  const supabaseAdmin = await adminClient();
+  const { data, error } = await supabaseAdmin
+    .from('auth.users') // Accessing the auth table directly
+    .select('*')
+    .eq('id', searchText); // Filter by UUID
+
+  if (error) {
+    console.error('Error fetching user by UUID:', error);
+    return;
+  }
+  console.log('User:', data);
+};
+  

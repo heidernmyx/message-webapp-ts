@@ -4,14 +4,19 @@ import { Input } from './ui/input'
 import SearchResult from './search-result'
 import { Button } from './ui/button'
 import { Search } from "lucide-react"
+import { searchByUsername, searchByUuid } from '@/app/actions'
 
 const SearchContent = () => {
 
-  const [ search, setSearch ] = React.useState<string>("");
+  const [ searchText, setSearchText ] = React.useState<string>("");
 
 
-  const searchUser = (search: string) => {
-    console.log(search)
+  const searchByUsername = (search: string) => {
+    searchByUsername(search)
+  }
+
+  const searchByuuid = (search: string) => {
+    searchByUuid(search)
   }
   return (
     <>
@@ -21,22 +26,22 @@ const SearchContent = () => {
           type="search"
           placeholder="Search Users"
           className="w-full mr-2 appearance-none bg-background pl-8 shadow-none"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearchText(e.target.value)}
         />
         <div className="flex space-x-1">
-          <Button onClick={() => searchUser(search)} className="relative flex justify-between text-xs" variant={"secondary"}>
+          <Button onClick={() => searchByUsername(searchText)} className="relative flex justify-between text-xs" variant={"secondary"}>
             Search by name
           </Button>
-          <Button className="relative flex justify-between text-xs" variant={"secondary"}>
+          <Button onClick={() => searchByuuid(searchText)} className="relative flex justify-between text-xs" variant={"secondary"}>
             Search by uid
           </Button>
         </div>
       </div>
       <div>
       </div>
-      <div className="mt-3 border border-solid border-muted rounded-lg ">
+      <pre className="mt-3 font-medium text-lg">Users Found: </pre>
+      <div className="border border-solid border-muted rounded-lg ">
         <SearchResult/>
-        
       </div>
     </>
   )
