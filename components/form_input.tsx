@@ -24,7 +24,7 @@ import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import FormTitle from '../components/form_title';
-import { registerSchema } from '@/lib/zod';
+import { registerSchema } from "@/lib/zod";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 
