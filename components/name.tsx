@@ -1,9 +1,9 @@
 import React from 'react'
 import { cookies } from 'next/headers'
 
-const Name = () => {
+const Name = async () => {
 
-  const cookieStored = cookies();
+  const cookieStored = await cookies();
   const usersessionName = cookieStored.get('email');
   console.log(usersessionName)
   return (
