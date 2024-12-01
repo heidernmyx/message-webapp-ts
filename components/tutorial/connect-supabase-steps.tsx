@@ -6,14 +6,14 @@ export default function ConnectSupabaseSteps() {
       <TutorialStep title="Create Supabase project">
         <p>
           Head over to{" "}
-          <a
+          {/* <a
             href="https://app.supabase.com/project/_/settings/api"
             target="_blank"
             className="font-bold hover:underline text-foreground/80"
             rel="noreferrer"
           >
             database.new
-          </a>{" "}
+          </a> */}
           and create a new Supabase project.
         </p>
       </TutorialStep>
@@ -29,14 +29,14 @@ export default function ConnectSupabaseSteps() {
             .env.local
           </span>{" "}
           and populate with values from{" "}
-          <a
+          {/* <a
             href="https://app.supabase.com/project/_/settings/api"
             target="_blank"
             className="font-bold hover:underline text-foreground/80"
             rel="noreferrer"
           >
             your Supabase project's API Settings
-          </a>
+          </a> */}
           .
         </p>
       </TutorialStep>

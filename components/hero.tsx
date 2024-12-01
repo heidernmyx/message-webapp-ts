@@ -6,14 +6,16 @@ export default function Header() {
     <div className="flex flex-col gap-16 items-center">
       <div className="flex gap-8 justify-center items-center">
         <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
+          // href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
           target="_blank"
           rel="noreferrer"
         >
           <SupabaseLogo />
         </a>
         <span className="border-l rotate-45 h-6" />
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
+        <a 
+          // href="https://nextjs.org/"
+          target="_blank" rel="noreferrer">
           <NextLogo />
         </a>
       </div>
@@ -21,7 +23,7 @@ export default function Header() {
       <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
         The fastest way to build apps with{" "}
         <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
+          // href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
           target="_blank"
           className="font-bold hover:underline"
           rel="noreferrer"
@@ -30,7 +32,7 @@ export default function Header() {
         </a>{" "}
         and{" "}
         <a
-          href="https://nextjs.org/"
+          // href="https://nextjs.org/"
           target="_blank"
           className="font-bold hover:underline"
           rel="noreferrer"
