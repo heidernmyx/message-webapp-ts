@@ -10,10 +10,15 @@ import {
 } from "@/components/ui/table"
 import { Button } from './ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import type { User } from '@/lib/types'
 
+interface SearchResultProps {
+  searchResult: User[];
+}
 
+const SearchResult: React.FC<SearchResultProps> = ({ searchResult }) => {
 
-const SearchResult:React.FC = () => {
+  console.log("searchResult", searchResult)
   return (
     <>
       <Table>
@@ -26,27 +31,27 @@ const SearchResult:React.FC = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium flex items-center justify-start space-x-2">
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <p className='text-base'>Heidern</p>
+          { searchResult.map((user) => (
+            <TableRow key={user.id}>
+              <TableCell className="font-medium flex items-center justify-start space-x-2">
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <p className='text-base'>{user.display_name}</p>
+                </TableCell>
+              <TableCell className="text-center">
+                <div className="flex justify-center space-x-2">
+                  {/* <Button variant={"default"}>Accept</Button>
+                  <Button variant={"secondary"}>Decline</Button> */}
+                  <Button onClick={() => console.log(user.id)} variant={"default"}>Add Friend</Button>
+                </div>
               </TableCell>
-            <TableCell className="text-center">
-              <div className="flex justify-center space-x-2">
-                {/* <Button variant={"default"}>Accept</Button>
-                <Button variant={"secondary"}>Decline</Button> */}
-                
-
-                <Button variant={"default"}>Add Friend</Button>
-              </div>
-            </TableCell>
-            {/* <TableCell className="text-center">
-              <Button variant={"secondary"}>Decline</Button>
-            </TableCell> */}
-          </TableRow>
+              {/* <TableCell className="text-center">
+                <Button variant={"secondary"}>Decline</Button>
+              </TableCell> */}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
 

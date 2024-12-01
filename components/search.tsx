@@ -5,18 +5,16 @@ import SearchResult from './search-result'
 import { Button } from './ui/button'
 import { Search } from "lucide-react"
 import { searchByUsername, searchByUuid } from '@/app/actions'
+import type { User } from '@/lib/types'
 
 const SearchContent = () => {
 
   const [ searchText, setSearchText ] = React.useState<string>("");
+  const [ result, setResult ] = React.useState<User[]>([]);
 
-
-  const searchByUsername = (search: string) => {
-    searchByUsername(search)
-  }
-
-  const searchByuuid = (search: string) => {
-    searchByUuid(search)
+  const searchResult = async (result: User[] | null) => {
+    setResult(result ?? []);
+    console.log("yate nga reuslts",result)
   }
   return (
     <>
@@ -29,19 +27,27 @@ const SearchContent = () => {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <div className="flex space-x-1">
-          <Button onClick={() => searchByUsername(searchText)} className="relative flex justify-between text-xs" variant={"secondary"}>
+          <Button onClick={async () => {
+            const result: User[] | null = await searchByUsername(searchText);
+            alert("result" + result);
+            result && searchResult(result);
+          }} className="relative flex justify-between text-xs" variant={"secondary"}>
             Search by name
           </Button>
-          <Button onClick={() => searchByuuid(searchText)} className="relative flex justify-between text-xs" variant={"secondary"}>
+          <Button onClick={async () => {
+            const result: User[] | null = await searchByUuid(searchText);
+            alert("result" + result);
+            result && searchResult(result);
+          } } className="relative flex justify-between text-xs" variant={"secondary"}>
             Search by uid
           </Button>
         </div>
       </div>
       <div>
       </div>
-      <pre className="mt-3 font-medium text-lg">Users Found: </pre>
+      { result.length > 0 ? (<pre className="mt-3 font-medium text-lg">Users Found: </pre>) : null }
       <div className="border border-solid border-muted rounded-lg ">
-        <SearchResult/>
+        <SearchResult searchResult = {result} />
       </div>
     </>
   )

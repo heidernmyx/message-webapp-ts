@@ -63,6 +63,7 @@ import Username from "./username"
 import React from "react"
 import SearchResult from "./search-result"
 import SearchContent from "./search"
+import { signOutAction } from "@/app/actions"
 // import { cookies } from "next/headers"
 
 // interface DashboardProps {
@@ -354,7 +355,7 @@ const DashboardContent: FC = ( ) => {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOutAction}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

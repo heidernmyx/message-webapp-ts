@@ -4,13 +4,7 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient, createAdminClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-
-
-
-export const adminClient = async (): Promise<any> => {
-  const supabaseAdmin = await createAdminClient();
-  return supabaseAdmin;
-}
+import { User } from "@/lib/types";
 
 export const signUpAction = async (formData: FormData) => {
 
@@ -42,7 +36,7 @@ export const signUpAction = async (formData: FormData) => {
   } else {
     return encodedRedirect( 
       "success",
-      "/sign-up",
+      "/sign-in",
       "Thanks for signing up! Please check your email for a verification link.",
     );
   }
@@ -143,35 +137,48 @@ export const signOutAction = async () => {
 };
 
 
+export const initialSearch = async () => {
 
-export const searchByUsername = async (searchText: string) => {
-
-  const supabaseAdmin = await adminClient();  
-  const { data, error } = await supabaseAdmin
-    .from('auth.users') // Accessing the auth table directly
-    .select('*')
-    .ilike('user_metadata->>display_name', `%${searchText}%`); // Filter by username
+  const supabase = await createClient();
+  const { data: profiles, error } = await supabase
+    .from('profiles')
+    .select('*');
 
   if (error) {
     console.error('Error fetching users:', error);
     return;
   }
-  console.log('Users:', data);
+
+  return profiles;
+}
+
+export const searchByUsername = async (searchText: string): Promise<User[] |null> => {
+
+  const supabase = await createClient();
+  const { data: profiles, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('display_name', searchText);
+  if (error) {
+    console.error('Error fetching users:', error);
+    return null;
+  }
+  return profiles.length > 0 ? profiles : null;
 };
 
 
-export const searchByUuid = async (searchText: string) => {
+export const searchByUuid = async (searchText: string): Promise<User[] |null> => {
 
-  const supabaseAdmin = await adminClient();
-  const { data, error } = await supabaseAdmin
-    .from('auth.users') // Accessing the auth table directly
-    .select('*')
-    .eq('id', searchText); // Filter by UUID
+  const supabase = await createClient();
+  const { data: profiles, error } = await supabase
+  .from('profiles')
+  .select('*')
+  .eq('id', searchText);
 
   if (error) {
     console.error('Error fetching user by UUID:', error);
-    return;
+    return null;
   }
-  console.log('User:', data);
+  return profiles.length > 0 ? profiles : null;
 };
   
