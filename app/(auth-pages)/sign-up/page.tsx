@@ -42,7 +42,7 @@ export default async function Signup(props: {
           <Label htmlFor="username">Username</Label>
           <Input
             name="username"
-            placeholder="Marvic"
+            placeholder="Civram"
             required
           />
           <SubmitButton formAction={signUpAction} pendingText="Signing up...">

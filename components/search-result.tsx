@@ -11,6 +11,7 @@ import {
 import { Button } from './ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import type { User } from '@/lib/types'
+import { addFriend } from '@/app/actions'
 
 interface SearchResultProps {
   searchResult: User[];
@@ -44,7 +45,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ searchResult }) => {
                 <div className="flex justify-center space-x-2">
                   {/* <Button variant={"default"}>Accept</Button>
                   <Button variant={"secondary"}>Decline</Button> */}
-                  <Button onClick={() => console.log(user.id)} variant={"default"}>Add Friend</Button>
+                  <Button onClick={() => addFriend(user.id)} variant={"default"}>Add Friend</Button>
                 </div>
               </TableCell>
               {/* <TableCell className="text-center">

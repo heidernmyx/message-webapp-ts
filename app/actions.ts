@@ -137,20 +137,38 @@ export const signOutAction = async () => {
 };
 
 
-export const initialSearch = async () => {
+export const initialSearch = async (): Promise<User[] |null> => {
 
   const supabase = await createClient();
   const { data: profiles, error } = await supabase
-    .from('profiles')
-    .select('*');
+  .from('profiles')
+  .select('*')
+  .range(0, 9)
 
   if (error) {
     console.error('Error fetching users:', error);
-    return;
+    return null;
   }
-
   return profiles;
 }
+
+
+// export const initialSearch = async (): Promise<User[] | null> => {
+//   const supabase = await createClient();
+//   const { data: profiles, error } = await supabase
+//     .from('profiles')
+//     .select('*')
+//     .order('random()') // Randomize rows
+//     .limit(10); // Fetch 10 rows
+
+//   if (error) {
+//     console.error('Error fetching users:', error);
+//     return null;
+//   }
+
+//   return profiles;
+// };
+
 
 export const searchByUsername = async (searchText: string): Promise<User[] |null> => {
 
@@ -182,3 +200,21 @@ export const searchByUuid = async (searchText: string): Promise<User[] |null> =>
   return profiles.length > 0 ? profiles : null;
 };
   
+export const addFriend = async (addedID: string) => {
+
+  const supabase = await createClient();
+
+  const { data: { user } } = await supabase.auth.getUser();
+  const { data, error } = await supabase
+  .from('add_request')
+  .insert([
+    { added_by: addedID, added_user: user?.id },
+  ])
+  .select()
+  if (error) {
+    console.error('Error adding friend:', error);
+    return null;
+  }
+  return data;
+
+}
